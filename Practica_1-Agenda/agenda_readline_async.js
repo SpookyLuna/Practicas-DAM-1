@@ -215,16 +215,19 @@ async function comprobacion(){
     }
 }
 
+//Mostrar contacto -  Función para evitar la repetición de código
+function mostrar_contacto(i){
+    return `Contacto ${i} || Nombre: ${contactos[i].split(",")[0]} Apellidos: ${contactos[i].split(",")[1]} DNI: ${contactos[i].split(",")[2]} Dirección: ${contactos[i].split(",")[3]} Email: ${contactos[i].split(",")[4]} Teléfono: ${contactos[i].split(",")[5]}`;
+}
+
 //Editar contacto
 async function editar (){
-
     console.log(`
         GESTIÓN DE AGENDA - EDITAR CONTACTO`);
 
     for (i = 0; i < contactos.length; i++) {
         console.log(`
-            Contacto ${i} || Nombre: ${contactos[i].split(",")[0]} Apellidos: ${contactos[i].split(",")[1]} DNI: ${contactos[i].split(",")[2]} Dirección: ${contactos[i].split(",")[3]} Email: ${contactos[i].split(",")[4]} Teléfono: ${contactos[i].split(",")[5]}
-            `);
+            ${mostrar_contacto(i)}`);
     }
     let seleccion = Number(await input("Selecciona el contacto a editar: "));
     contacto_editar = seleccion;
@@ -284,8 +287,7 @@ async function mostrar(){
         `)
     for (i = 0; i < contactos.length; i++) {
         console.log(`
-            Nombre: ${contactos[i].split(",")[0]} Apellidos: ${contactos[i].split(",")[1]} DNI: ${contactos[i].split(",")[2]} Dirección: ${contactos[i].split(",")[3]} Email: ${contactos[i].split(",")[4]} Teléfono: ${contactos[i].split(",")[5]}
-            `);
+            ${mostrar_contacto(i)}`);
     }
 
     console.log(`
@@ -339,9 +341,8 @@ async function buscar_contacto(){
             for (let i = 0; i < contactos.length; i++) {
                 let nombre = contactos[i].split(",")[0];
                 if (nombre.toLowerCase() === nombre_buscar.toLowerCase()) {
-                    console.log(console.log(`
-                        Nombre: ${contactos[i].split(",")[0]} Apellidos: ${contactos[i].split(",")[1]} DNI: ${contactos[i].split(",")[2]} Dirección: ${contactos[i].split(",")[3]} Email: ${contactos[i].split(",")[4]} Teléfono: ${contactos[i].split(",")[5]}
-                        `));
+                    console.log(`
+                        ${mostrar_contacto(i)}`);
                     
                     let valido;
                     while (valido != true){
@@ -372,11 +373,8 @@ async function buscar_contacto(){
             for (let i = 0; i <= contactos.length; i++) {
                 let apellido = contactos[i].split(",")[1];
                 if (apellido.toLowerCase() === apellido_buscar.toLowerCase()) {
-
-
-                    console.log(console.log(`
-                        Nombre: ${contactos[i].split(",")[0]} Apellidos: ${contactos[i].split(",")[1]} DNI: ${contactos[i].split(",")[2]} Dirección: ${contactos[i].split(",")[3]} Email: ${contactos[i].split(",")[4]} Teléfono: ${contactos[i].split(",")[5]}
-                        `));                    
+                    console.log(`
+                        ${mostrar_contacto(i)}`);                 
                     let valido;
                     while (valido != true){
                         let volver = await input(`
@@ -400,11 +398,8 @@ async function buscar_contacto(){
             for (let i = 0; i <= contactos.length; i++) {
                 let dni = contactos[i].split(",")[2];
                 if (dni.toLowerCase() === dni_buscar.toLowerCase()) {
-
-
-                    console.log(console.log(`
-                        Nombre: ${contactos[i].split(",")[0]} Apellidos: ${contactos[i].split(",")[1]} DNI: ${contactos[i].split(",")[2]} Dirección: ${contactos[i].split(",")[3]} Email: ${contactos[i].split(",")[4]} Teléfono: ${contactos[i].split(",")[5]}
-                        `));                    
+                    console.log(`
+                        ${mostrar_contacto(i)}`);                 
                     let valido;
                     while (valido != true){
                         let volver = await input(`
@@ -428,11 +423,8 @@ async function buscar_contacto(){
             for (let i = 0; i <= contactos.length; i++) {
                 let email = contactos[i].split(",")[4];
                 if (email.toLowerCase() === email_buscar.toLowerCase()) {
-
-
-                    console.log(console.log(`
-                        Nombre: ${contactos[i].split(",")[0]} Apellidos: ${contactos[i].split(",")[1]} DNI: ${contactos[i].split(",")[2]} Dirección: ${contactos[i].split(",")[3]} Email: ${contactos[i].split(",")[4]} Teléfono: ${contactos[i].split(",")[5]}
-                        `));                    
+                    console.log(`
+                        ${mostrar_contacto(i)}`);                
                     let valido;
                     while (valido != true){
                         let volver = await input(`
@@ -455,11 +447,8 @@ async function buscar_contacto(){
             for (let i = 0; i <= contactos.length; i++) {
                 let telefono = contactos[i].split(",")[5];
                 if (telefono.toLowerCase() === telefono_buscar.toLowerCase()) {
-                    let contactos = [];
-
-                    console.log(console.log(`
-                        Nombre: ${contactos[i].split(",")[0]} Apellidos: ${contactos[i].split(",")[1]} DNI: ${contactos[i].split(",")[2]} Dirección: ${contactos[i].split(",")[3]} Email: ${contactos[i].split(",")[4]} Teléfono: ${contactos[i].split(",")[5]}
-                        `));                    
+                    console.log(`
+                        ${mostrar_contacto(i)}`);                
                     let valido;
                     while (valido != true){
                         let volver = await input(`
