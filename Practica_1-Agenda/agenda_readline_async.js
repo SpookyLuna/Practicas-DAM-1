@@ -492,7 +492,7 @@ async function borrar(){
     let seleccion = Number(await input(`
         Introduce el contacto que deseas borrar: `));
     
-    if (contactos.indexOf(seleccion)){
+    if (seleccion >= 0 && seleccion < contactos.length){
         console.log(`
             Contacto ${contactos[seleccion].split(",")[0, 2]} eliminado. Volviendo...`);
         contactos.splice(seleccion, 1); //Splice para reestructurar Array, delete daba problemas
