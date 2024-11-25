@@ -319,6 +319,7 @@ async function mostrar(){
 
 //Buscar contacto
 async function buscar_contacto(){
+    let encontrado = false;
     console.log(`
         GESTIÓN DE AGENDA - BUSCAR CONTACTO
 
@@ -334,138 +335,174 @@ async function buscar_contacto(){
 
     let opcion = Number(await input(`
         Opción: `));
+
+    let encontrados = [];
     switch (opcion){
         case 1:
-            let nombre_buscar = await input(`
-                Introduce el nombre a buscar: `);
-            for (let i = 0; i < contactos.length; i++) {
-                let nombre = contactos[i].split(",")[0];
-                if (nombre.toLowerCase() === nombre_buscar.toLowerCase()) {
-                    console.log(`
-                        ${mostrar_contacto(i)}`);
-                    
-                    let valido;
-                    while (valido != true){
-                        let volver = await input(`
-                            ¿Volver atrás? (S): `);
-                        switch (volver){
-                            case "S": case "s":
+                let nombre_buscar = await input(`Introduce el nombre a buscar: `);
+                for (let i = 0; i < contactos.length; i++) {
+                    let nombre_buscando = contactos[i].split(",")[0];
+                    if (nombre_buscando.toLowerCase() === nombre_buscar.toLowerCase()) {
+                        encontrados.push(i);
+                    }
+                }
+            
+                if (encontrados.length > 0) {
+                    console.log(`Se han encontrado ${encontrados.length} contacto/s con el nombre "${nombre_buscar}":`);
+                    for (let i of encontrados) {
+                        console.log(mostrar_contacto(i));
+                    }
+            
+                    let valido = false;
+                    while (!valido) {
+                        let volver = await input("¿Volver atrás? (S): ");
+                        switch (volver.toLowerCase()) {
+                            case "s":
                                 valido = true;
                                 console.clear();
-                                buscar_contacto();
+                                mostrar();
                                 break;
                             default:
-                                console.clear();
+                                console.log("Opción inválida. Escribe 'S' para volver.");
                                 break;
                         }
-                    }        
-                }   
-                else{
-                    console.log(`
-                        No se ha enconrado ningún contacto con ese nombre, volviendo...`);
-                        buscar_contacto();
+                    }
+                } else {
+                    console.log(`No se ha econtrado ningún contacto con el nombre "${nombre_buscar}".`);
                 }
-            }    
-            break;
+                break;
         case 2:
-            let apellido_buscar = await input(`
-                Introduce el apellido a buscar: `);
-            for (let i = 0; i <= contactos.length; i++) {
-                let apellido = contactos[i].split(",")[1];
-                if (apellido.toLowerCase() === apellido_buscar.toLowerCase()) {
-                    console.log(`
-                        ${mostrar_contacto(i)}`);                 
-                    let valido;
-                    while (valido != true){
-                        let volver = await input(`
-                            ¿Volver atrás? (S): `);
-                        switch (volver){
-                            case "S": case "s":
-                                valido = true;
-                                console.clear();
-                                buscar_contacto();
-                                break;
-                            default:
-                                console.clear();
-                                break;
+                let apellido_buscar = await input(`Introduce el apellido a buscar: `);        
+                for (let i = 0; i < contactos.length; i++) {
+                    let apellido_buscando = contactos[i].split(",")[1];
+                    if (apellido_buscando.toLowerCase() === apellido_buscar.toLowerCase()) {
+                        encontrados.push(i);
                     }
                 }
-            }    
-        }
+            
+                if (encontrados.length > 0) {
+                    console.log(`Se han encontrado ${encontrados.length} contacto/s con el apellido "${apellido_buscar}":`);
+                    for (let i of encontrados) {
+                        console.log(mostrar_contacto(i));
+                    }
+            
+                    let valido = false;
+                    while (!valido) {
+                        let volver = await input("¿Volver atrás? (S): ");
+                        switch (volver.toLowerCase()) {
+                            case "s":
+                                valido = true;
+                                console.clear();
+                                mostrar();
+                                break;
+                            default:
+                                console.log("Opción inválida. Escribe 'S' para volver.");
+                                break;
+                        }
+                    }
+                } else {
+                    console.log(`No se ha econtrado ningún contacto con el apellido "${apellido_buscar}".`);
+                }
+                break;
         case 3:
-            let dni_buscar = await input(`
-                Introduce el DNI a buscar: `);
-            for (let i = 0; i <= contactos.length; i++) {
-                let dni = contactos[i].split(",")[2];
-                if (dni.toLowerCase() === dni_buscar.toLowerCase()) {
-                    console.log(`
-                        ${mostrar_contacto(i)}`);                 
-                    let valido;
-                    while (valido != true){
-                        let volver = await input(`
-                            ¿Volver atrás? (S): `);
-                        switch (volver){
-                            case "S": case "s":
-                                valido = true;
-                                console.clear();
-                                buscar_contacto();
-                                break;
-                            default:
-                                console.clear();
-                                break;
+                let dni_buscar = await input(`Introduce el DNI a buscar: `);        
+                for (let i = 0; i < contactos.length; i++) {
+                    let dni_buscando = contactos[i].split(",")[2];
+                    if (dni_buscando.toLowerCase() === dni_buscar.toLowerCase()) {
+                        encontrados.push(i);
                     }
                 }
-            }
-        }
+            
+                if (encontrados.length > 0) {
+                    console.log(`Se han encontrado ${encontrados.length} contacto/s con el DNI "${dni_buscar}":`);
+                    for (let i of encontrados) {
+                        console.log(mostrar_contacto(i));
+                    }
+            
+                    let valido = false;
+                    while (!valido) {
+                        let volver = await input("¿Volver atrás? (S): ");
+                        switch (volver.toLowerCase()) {
+                            case "s":
+                                valido = true;
+                                console.clear();
+                                mostrar();
+                                break;
+                            default:
+                                console.log("Opción inválida. Escribe 'S' para volver.");
+                                break;
+                        }
+                    }
+                } else {
+                    console.log(`No se ha econtrado ningún contacto con el DNI "${dni_buscar}".`);
+                }
+                break;
         case 4:
-            let email_buscar = await input(`
-                Introduce la email a buscar: `);
-            for (let i = 0; i <= contactos.length; i++) {
-                let email = contactos[i].split(",")[4];
-                if (email.toLowerCase() === email_buscar.toLowerCase()) {
-                    console.log(`
-                        ${mostrar_contacto(i)}`);                
-                    let valido;
-                    while (valido != true){
-                        let volver = await input(`
-                            ¿Volver atrás? (S): `);
-                        switch (volver){
-                            case "S": case "s":
-                                valido = true;
-                                console.clear();
-                                buscar_contacto();
-                                break;
-                            default:
-                                console.clear();
-                                break;
+                let email_buscar = await input(`Introduce el email a buscar: `);        
+                for (let i = 0; i < contactos.length; i++) {
+                    let email_buscando = contactos[i].split(",")[4];
+                    if (email_buscando.toLowerCase() === email_buscar.toLowerCase()) {
+                        encontrados.push(i);
                     }
                 }
-            }
-        }
+            
+                if (encontrados.length > 0) {
+                    console.log(`Se han encontrado ${encontrados.length} contacto/s con el email "${email_buscar}":`);
+                    for (let i of encontrados) {
+                        console.log(mostrar_contacto(i));
+                    }
+            
+                    let valido = false;
+                    while (!valido) {
+                        let volver = await input("¿Volver atrás? (S): ");
+                        switch (volver.toLowerCase()) {
+                            case "s":
+                                valido = true;
+                                console.clear();
+                                mostrar();
+                                break;
+                            default:
+                                console.log("Opción inválida. Escribe 'S' para volver.");
+                                break;
+                        }
+                    }
+                } else {
+                    console.log(`No se ha econtrado ningún contacto con el email "${email_buscar}".`);
+                }
+                break;
         case 5:
-            let telefono_buscar = await input("Introduce la dirección a buscar: ");
-            for (let i = 0; i <= contactos.length; i++) {
-                let telefono = contactos[i].split(",")[5];
-                if (telefono.toLowerCase() === telefono_buscar.toLowerCase()) {
-                    console.log(`
-                        ${mostrar_contacto(i)}`);                
-                    let valido;
-                    while (valido != true){
-                        let volver = await input(`
-                            ¿Volver atrás? (S): `);
-                        switch (volver){
-                            case "S": case "s":
-                                valido = true;
-                                console.clear();
-                                buscar_contacto();
-                                break;
-                            default:
-                                console.clear();
-                                break;
+                let telefono_buscar = await input(`Introduce el teléfono a buscar: (+XX XXXXXXXXX)`);        
+                for (let i = 0; i < contactos.length; i++) {
+                    let telefono_buscando = contactos[i].split(",")[5];
+                    if (telefono_buscando.toLowerCase() === telefono_buscar.toLowerCase()) {
+                        encontrados.push(i);
                     }
                 }
-            }
-        }
+            
+                if (encontrados.length > 0) {
+                    console.log(`Se han encontrado ${encontrados.length} contacto/s con el teléfono "${telefono_buscar}":`);
+                    for (let i of encontrados) {
+                        console.log(mostrar_contacto(i));
+                    }
+            
+                    let valido = false;
+                    while (!valido) {
+                        let volver = await input("¿Volver atrás? (S): ");
+                        switch (volver.toLowerCase()) {
+                            case "s":
+                                valido = true;
+                                console.clear();
+                                mostrar();
+                                break;
+                            default:
+                                console.log("Opción inválida. Escribe 'S' para volver.");
+                                break;
+                        }
+                    }
+                } else {
+                    console.log(`No se ha econtrado ningún contacto con el teléfono "${telefono_buscar}".`);
+                }
+                break;
         case 6:
             console.clear();
             menu_agenda();
